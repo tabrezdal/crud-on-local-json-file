@@ -1,0 +1,48 @@
+[
+    {
+      "id" : 1,
+      "image" : "http://localhost:3000/src/assets/imgs/01.jpg",
+      "name" : "Tom",
+      "Roll_no" : "1",
+      "Email_id" : "tom@gmail.com",
+      "Contact_No" : "46844 694646",
+      "Hobby" : "Singing, Gaming",
+      "Gender" : "Male",
+      "Status" : "Active"
+    },
+    {
+        "id" : 1,
+        "image" : "./src/assets/imgs/02.jpg",
+        "name" : "Pluto",
+        "Roll_no" : "2",
+        "Email_id" : "pluto@yahoo.com",
+        "Contact_No" : "48822 99565",
+        "Hobby" : "Jumping, Drawing",
+        "Gender" : "Male",
+        "Status" : "Active"
+      
+    },
+    {
+        "id" : 1,
+        "image" : "./src/assets/imgs/03.jpg",
+        "name" : "Richie",
+        "Roll_no" : "3",
+        "Email_id" : "richi@live.com",
+        "Contact_No" : "98956 94612",
+        "Hobby" : "Fishing, Gyming",
+        "Gender" : "Male",
+        "Status" : "Inactive"
+     
+    },
+    {
+        "id" : 1,
+        "image" : "./src/assets/imgs/04.jpg",
+        "name" : "Fred",
+        "Roll_no" : "4",
+        "Email_id" : "fred@outlook.com",
+        "Contact_No" : "74125 85526",
+        "Hobby" : "Cooking, Travelling",
+        "Gender" : "Male",
+        "Status" : "Active"
+    }
+  ]

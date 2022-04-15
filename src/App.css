@@ -1,0 +1,37 @@
+.content-header{
+    width: 100%;
+    background-color: dodgerblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.main_buttons{
+    color : white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.main_buttons button{
+    background-color: transparent;
+    font-weight: 600;
+    color: white;
+    border-right: 2px solid white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0;
+}
+.main_buttons button:last-child{
+    border-right:none;
+}
+
+.pagination, .search {
+    display: flex;
+    justify-content: end;  
+}
