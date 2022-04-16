@@ -33,5 +33,16 @@
 
 .pagination, .search {
     display: flex;
-    justify-content: end;  
+    justify-content: flex-end;  
+}
+
+
+.overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left:0;
+    width: 100%;
+    background-color: rgba(65, 65, 65, 0.342);
 }

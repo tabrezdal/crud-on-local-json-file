@@ -1,12 +1,17 @@
 [
     {
       "id" : 1,
-      "image" : "http://localhost:3000/src/assets/imgs/01.jpg",
+      "image" : "./src/assets/imgs/01.jpg",
       "name" : "Tom",
       "Roll_no" : "1",
       "Email_id" : "tom@gmail.com",
       "Contact_No" : "46844 694646",
-      "Hobby" : "Singing, Gaming",
+      "Hobbies" : {
+        "Singing": "true",
+        "Reading": "true",
+        "Cycling": "true",
+        "Fishing": "true"
+      },
       "Gender" : "Male",
       "Status" : "Active"
     },
@@ -17,7 +22,12 @@
         "Roll_no" : "2",
         "Email_id" : "pluto@yahoo.com",
         "Contact_No" : "48822 99565",
-        "Hobby" : "Jumping, Drawing",
+        "Hobbies" : {
+          "Singing": "true",
+          "Reading": "true",
+          "Cycling": "true",
+          "Fishing": "true"
+        },
         "Gender" : "Male",
         "Status" : "Active"
       
@@ -29,7 +39,12 @@
         "Roll_no" : "3",
         "Email_id" : "richi@live.com",
         "Contact_No" : "98956 94612",
-        "Hobby" : "Fishing, Gyming",
+        "Hobbies" : {
+          "Singing": "true",
+          "Reading": "true",
+          "Cycling": "true",
+          "Fishing": "true"
+        },
         "Gender" : "Male",
         "Status" : "Inactive"
      
@@ -41,7 +56,12 @@
         "Roll_no" : "4",
         "Email_id" : "fred@outlook.com",
         "Contact_No" : "74125 85526",
-        "Hobby" : "Cooking, Travelling",
+        "Hobbies" : {
+          "Singing": "true",
+          "Reading": "true",
+          "Cycling": "true",
+          "Fishing": "true"
+        },
         "Gender" : "Male",
         "Status" : "Active"
     }

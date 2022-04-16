@@ -1,17 +1,49 @@
-import React, { useState } from 'react';
+import './App.css';
 import Data from './data.json'
-import '../src/App.css'
+import React, { useState } from 'react';
 
-const App = () => {
+function AppOld() {
 
-  const [modalTitles, setModaltitles] = useState ();
+  const [usrdata, setUserData] = useState('');
 
+  const loadData = (usrdata) => {
+    
+    usrdata.map( data => {
+      return (
+        <tr>
+          <td><input type="checkbox" id={data.id}/></td>
+          <td><img key={data.id} src={data.image} alt="" /></td>
+          <td>{data.name}</td>
+          <td>{data.Roll_no}</td>
+          <td>{data.Email_id}</td>
+          <td>{data.Contact_No}</td>
+          <td>{data.Hobbies.Cycling}</td>
+          <td>{data.Gender}</td>
+          <td>{data.Status}</td>
+          <td></td>
+        </tr>
+      )
+    })
+  }
 
+  const [search, setSearch] = useState('');
+
+  const handelChange = e =>{
+    setSearch(e.target.value);
+    const filteredStudent = Data.filter(data => 
+      data.name.toString().toLowerCase().indexOf(search.toLowerCase()) !== -1
+  )
+  setUserData(filteredStudent)
+  }
 
   const [show, setShow] = useState(false);
-  
-  const [search, setSearch] = useState('');
-  // const [usrdata, setUserData] = useState('');
+
+  const [rid, setRecID] = useState();
+
+  const edit = (rid) => {
+    setRecID(rid);
+  }
+
   const [student, setStudent] = useState({
     name:'',
     roll_no: '',
@@ -31,36 +63,8 @@ const App = () => {
       ...student, [e.target.name] :  e.target.value});
     console.log({...student, [e.target.name] : value});
   }
-  const handleShow = (title) => {
-    setModaltitles(title)
-    console.log(title)
-    setShow(!show);
-  }
-
-
-  const handelChange = e =>{
-    setSearch(e.target.value);
-    const filteredStudent = Data.filter(data => 
-      data.name.toString().toLowerCase().indexOf(search.toLowerCase()) !== -1
-  )
-  filteredStudent ()
-  }
-
-  const[check, setCheck] =  useState (false)
-  const checkHandle = () => {
-    setCheck(!check)
-    console.log("CheckBox")
-  }
-
-  const [allCheck, setAllCheck] = useState(false)
-
-  const checkAll = () => {
-    console.log("CheckBox All")
-    setAllCheck(!allCheck)
-    setCheck({ allchecked: check})
-  }
-
-
+  const handleShow = () => setShow(!show);
+  
   return (
     <div className="App">
         <div className="container">
@@ -70,13 +74,13 @@ const App = () => {
                 <h2>Static Crud</h2>
               </div>
               <div className="main_buttons">
-                <button className="btn" onClick={handleShow("add")}>Add</button>
-                <button className="btn" onClick={handleShow("edit")}>Edit</button>
+                <button className="btn" onClick={handleShow}>Add</button>
+                <button className="btn" onClick={edit(rid)} >Edit</button>
                 <button className="btn">Delete</button>
               </div>
             </div>
 
-            <div className="d-flex justify-content-between w-100">
+            <div className="d-flex justify-content-between">
               <div id="records_per_page">
                 
 
@@ -92,7 +96,7 @@ const App = () => {
             <table id="example" className="table table-striped table-bordered" style={{ width: '100%' }}>
               <thead>
                 <tr>
-                  <th><input type="checkbox" onChange={checkAll} /></th>
+                  <th><input type="checkbox" onclick="checkAll(this)" /></th>
                   <th>Student image</th>
                   <th>Name</th>
                   <th>Roll No.</th>
@@ -105,22 +109,7 @@ const App = () => {
                 </tr>
               </thead>
               <tbody>
-                {Data.map( data => {
-                  return (
-                    <tr>
-                      <td><input type="checkbox" id={data.id}  allChecked="unchecked" onChange={checkHandle} /></td>
-                      <td><img src={data.image} alt="" /></td>
-                      <td>{data.name}</td>
-                      <td>{data.Roll_no}</td>
-                      <td>{data.Email_id}</td>
-                      <td>{data.Contact_No}</td>
-                      <td>{data.Hobbies.Cycling}</td>
-                      <td>{data.Gender}</td>
-                      <td>{data.Status}</td>
-                      <td></td>
-                    </tr>
-                  )
-                })}
+                {loadData(usrdata)}
               </tbody>
             </table>
             <div className="pagination w-100">
@@ -144,8 +133,8 @@ const App = () => {
                     <div className="modal-dialog modal-dialog-centered" role="document">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title" id="exampleModalLongTitle">{modalTitles}</h5>
-                          <button type="button" className="close" onClick={ handleShow } >
+                          <h5 className="modal-title" id="exampleModalLongTitle">Add Student</h5>
+                          <button type="button" className="close" onClick={ handleShow} >
                             <span aria-hidden="true">×</span>
                           </button>
                         </div>
@@ -238,9 +227,113 @@ const App = () => {
                   </div>
           
           )}
+
+        {/* Add StudentModal */}
+            {show && (
+
+                      <div className="overlay" show={show}>
+                      <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLongTitle">Edit Student</h5>
+                            <button type="button" className="close" onClick={ handleShow} >
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div className="modal-body">
+
+                            <form>
+                              <div className="form-group">
+                                <label htmlFor="name">Name</label>
+                                <input type="text" className="form-control" name="name" value={Data.name} onChange={onChange} />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="roll_no">Roll No</label>
+                                <input type="text" className="form-control" name="roll_no" value={Data.roll_no} onChange={onChange} />
+                              </div>
+                              <div className="form-group">
+                                <label htmlFor="email">Email address</label>
+                                <input type="email" className="form-control" name="email" value={Data.email} onChange={onChange} />
+                              </div>
+                              
+                              <div className="form-group">
+                                <label htmlFor="contact_no">Contact No</label>
+                                <input type="text" className="form-control" name="contact_no" value={Data.contact_no} onChange={onChange} />
+                              </div>
+
+                              <div>
+                                <label>Hobbies</label>
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div className="form-check form-check-inline px-2">
+                                  <input className="form-check-input" type="checkbox" name={Data.hobbies.singing} checked={Data.hobbies.singing} value={Data.hobbies.singing} onChange={onChange} />
+                                  <label className="form-check-label" htmlFor="inlineCheckbox1">Singing</label>
+                                </div>
+                                <div className="form-check form-check-inline px-2">
+                                  <input className="form-check-input" type="checkbox" name={Data.hobbies.fishing} checked={Data.hobbies.fishing} value={Data.hobbies.reading} onChange={onChange} />
+                                  <label className="form-check-label" htmlFor="inlineCheckbox2">Reading</label>
+                                </div>
+                                <div className="form-check form-check-inline px-2">
+                                  <input className="form-check-input" type="checkbox" name={Data.hobbies.fishing} checked={Data.hobbies.fishing} value={Data.hobbies.cycling} onChange={onChange} />
+                                  <label className="form-check-label" htmlFor="inlineCheckbox3">Cycling</label>
+                                </div>
+                                <div className="form-check form-check-inline px-2">
+                                  <input className="form-check-input" type="checkbox" name={Data.hobbies.fishing} checked={Data.hobbies.fishing} value={Data.hobbies.fishing} onChange={onChange} />
+                                  <label className="form-check-label" htmlFor="inlineCheckbox4">Fishing</label>
+                                </div>
+                              </div>
+                              </div>
+
+
+
+                              <div>
+                                <label>Gender</label>
+                                <div className="d-flex justify-content-between align-items-center px-3">
+                                <div className="form-check">
+                                  <input className="form-check-input" type="radio" name="gender" defaultValue="option1" checked={Data.gender.male} value={Data.gender} defaultChecked  />
+                                  <label className="form-check-label" htmlFor="exampleRadios1">
+                                    Male
+                                  </label>
+                                </div>
+                                <div className="form-check">
+                                  <input className="form-check-input" type="radio" name="gender" defaultValue="option2" checked={Data.gender.other}  value={Data.gender}  />
+                                  <label className="form-check-label" htmlFor="exampleRadios2">
+                                    Female
+                                  </label>
+                                </div>
+                                <div className="form-check">
+                                  <input className="form-check-input" type="radio" name="gender" defaultValue="option3" checked={Data.gender.other} value={Data.gender} />
+                                  <label className="form-check-label" htmlFor="exampleRadios3">
+                                    Other
+                                  </label>
+                                </div>
+                                </div>
+                              </div>
+                            
+                            
+                              <div className="form-group">
+                                <label htmlFor="exampleFormControlFile1">Upload Image</label>
+                                <input type="file" className="form-control-file" name="exampleFormControlFile1" value={student.image} />
+                              </div>
+
+
+
+                            </form>
+
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" onClick={ handleShow}>Close</button>
+                            <button type="button" className="btn btn-primary"  onClick={ handleShow}>Add Student</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+            )}
+
       </div>
 
-  )
+
+        );
 }
 
-export default App
+        export default AppOld;
